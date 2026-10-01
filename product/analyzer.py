@@ -1,38 +1,24 @@
-positive_words = {
-    "amazing", "good", "great", "excellent", "love",
-    "awesome", "perfect", "nice", "helpful", "happy"
-}
+import os
+import requests
 
-negative_words = {
-    "bad", "terrible", "awful", "hate", "poor",
-    "horrible", "worst", "disappointing", "sad", "useless"
-}
+def analyze_with_ai(text):
+    url = "https://router.huggingface.co/hf-inference/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
-def analyze_text(text):
-    words = text.lower().split()
-
-    positive_count = sum(word in positive_words for word in words)
-    negative_count = sum(word in negative_words for word in words)
-
-    if positive_count > negative_count:
-        sentiment = "positive"
-    elif negative_count > positive_count:
-        sentiment = "negative"
-    else:
-        sentiment = "neutral"
-
-    return {
-        "text": text,
-        "word_count": len(words),
-        "char_count": len(text),
-        "sentence_count": max(1, text.count(".") + text.count("!") + text.count("?")),
-        "positive_words": positive_count,
-        "negative_words": negative_count,
-        "sentiment": sentiment
+    headers = {
+        "Authorization": f"Bearer {os.environ['HF_TOKEN']}"
     }
+
+    response = requests.post(
+        url,
+        headers=headers,
+        json={"inputs": text}
+    )
+
+    return response.json()
 
 review = input("Enter your text: ")
 
-result = analyze_text(review)
+result = analyze_with_ai(review)
 
+print("\nAI analysis:")
 print(result)
