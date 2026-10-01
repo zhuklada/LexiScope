@@ -1,0 +1,11 @@
+text,sentiment,politeness,directness
+The product is amazing,positive,low,low
+The delivery was terrible,negative,low,low
+I love this product,positive,low,low
+The quality is excellent,positive,low,low
+The service was awful,negative,low,low
+The product is good,positive,low,low
+I hate this service,negative,low,low
+The quality is poor,negative,low,low
+Amazing service and good quality,positive,low,low
+The product is bad,negative,low,low
