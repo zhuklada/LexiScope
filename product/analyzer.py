@@ -3,10 +3,12 @@ def analyze_text(text):
 
     return {
         "text": text,
-        "word_count": len(words)
+        "word_count": len(words),
+        "char_count": len(text),
+        "sentence_count": max(1, text.count(".") + text.count("!") + text.count("?"))
     }
 
-review = "The product is amazing and the service is good"
+review = input("Enter your text: ")
 
 result = analyze_text(review)
 
