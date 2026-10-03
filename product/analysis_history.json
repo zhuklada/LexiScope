@@ -1,0 +1,2 @@
+{"text": "The product was amazing and the service is good", "sentiment": "POSITIVE", "confidence": 99.99, "word_count": 9, "character_count": 47, "sentence_count": 1, "average_word_length": 4.33}
+{"text": "I hate this product. The servise is terrible.", "sentiment": "NEGATIVE", "confidence": 99.97, "word_count": 8, "character_count": 45, "sentence_count": 2, "average_word_length": 4.5}
