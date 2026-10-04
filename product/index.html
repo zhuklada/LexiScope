@@ -3,60 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>LexiScope</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            background: #f4f6fb;
+            color: #202124;
+        }
+
+        .container {
+            max-width: 900px;
             margin: 50px auto;
             padding: 20px;
-            background: #f5f5f5;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
         h1 {
-            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         }
 
         textarea {
             width: 100%;
             height: 180px;
             padding: 15px;
-            box-sizing: border-box;
+            border: 1px solid #d6d9e0;
+            border-radius: 10px;
+            resize: vertical;
             font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #555;
         }
 
         button {
             margin-top: 15px;
-            padding: 12px 25px;
-            font-size: 16px;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #202124;
+            color: white;
+            font-size: 17px;
             cursor: pointer;
         }
 
+        button:hover {
+            background: #333;
+        }
+
         .result {
-            margin-top: 25px;
-            padding: 20px;
-            background: white;
+            display: none;
+        }
+
+        .result h2 {
+            margin-top: 0;
+        }
+
+        .sentiment {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            background: #f4f6fb;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .history-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .empty {
+            color: #777;
+        }
+
+        max-width: 600px {
+            .container {
+                margin: 20px auto;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>LexiScope</h1>
+<div class="container">
 
-    <p>AI-powered text analysis</p>
+    <header>
+        <h1>LexiScope</h1>
+        <p class="subtitle">
+            AI-powered text analysis
+        </p>
+    </header>
 
-    <textarea placeholder="Enter your text here..."></textarea>
+    <div class="card">
 
-    
+        <h2>Analyze your text</h2>
 
-    <button>Analyze</button>
+        <textarea
+            id="textInput"
+            placeholder="Enter your text here..."
+        ></textarea>
 
-    <div class="result">
-        <h2>Analysis</h2>
-        <p>Your results will appear here.</p>
+        <button onclick="analyzeText()">
+            Analyze
+        </button>
+
     </div>
+
+    <div class="card result" id="result">
+
+        <h2>Analysis</h2>
+
+        <div class="sentiment" id="sentiment">
+            —
+        </div>
+
+        <p>
+            Confidence:
+            <strong id="confidence">—</strong>
+        </p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <span class="stat-number" id="wordCount">—</span>
+                <span class="stat-label">Words</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number" id="characterCount">—</span>
+                <span class="stat-label">Characters</span>
+            </div>
+
+            <div class="stat">
+                <span class="stat-number" id="sentenceCount">—</span>
+                <span class="stat-label">Sentences</span>
+            </div>
+
+        </div>
+
+        <p style="margin-top: 20px;">
+            Language:
+            <strong id="language">—</strong>
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Analysis History</h2>
+
+        <div id="history">
+            <p class="empty">
+                No analyses yet.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function analyzeText() {
+
+    const text = document
+        .getElementById("textInput")
+        .value
+        .trim();
+
+    if (!text) {
+        alert("Please enter some text first.");
+        return;
+    }
+
+    const resultBox = document.getElementById("result");
+
+    resultBox.style.display = "block";
+
+    document.getElementById("sentiment").textContent =
+        "Analyzing...";
+
+    try {
+
+        const response = await fetch("/analyze", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                text: text
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Analysis failed.");
+        }
+
+        document.getElementById("sentiment").textContent =
+            data.sentiment;
+
+        document.getElementById("language").textContent =
+            data.language;
+
+        document.getElementById("confidence").textContent =
+            data.confidence + "%";
+
+        document.getElementById("wordCount").textContent =
+            data.word_count;
+
+        document.getElementById("characterCount").textContent =
+            data.character_count;
+
+        document.getElementById("sentenceCount").textContent =
+            data.sentence_count;
+
+    } catch (error) {
+
+        document.getElementById("sentiment").textContent =
+            "Error";
+
+        document.getElementById("confidence").textContent =
+            "—";
+
+        alert(error.message);
+    }
+}
+
+</script>
 
 </body>
 </html>
