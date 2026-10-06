@@ -102,6 +102,22 @@ class LexiScopeServer(BaseHTTPRequestHandler):
 
     def do_GET(self):
 
+        if self.path == "/history":
+            try:
+                with open("analysis_history.json", "r", encoding="utf-8") as file:
+                    history = [
+                        json.loads(line)
+                        for line in file
+                        if line.strip()
+                    ]
+
+                self.send_json(history)
+
+            except FileNotFoundError:
+                self.send_json([])
+
+            return
+
         if self.path == "/":
 
             try:
@@ -129,11 +145,7 @@ class LexiScopeServer(BaseHTTPRequestHandler):
                 self.wfile.write(content)
 
             except FileNotFoundError:
-
-                self.send_error(
-                    404,
-                    "index.html not found"
-                )
+                self.send_error(404,"index.html not found")
 
             return
 
@@ -203,6 +215,9 @@ class LexiScopeServer(BaseHTTPRequestHandler):
                 **statistics
 
             }
+            
+            with open("analysis_history.json", "a", encoding="utf-8") as file:
+                file.write(json.dumps(result, ensure_ascii=False) + "\n")
 
             self.send_json(result)
 

@@ -300,6 +300,31 @@ async function analyzeText() {
     }
 }
 
+async function loadHistory() {
+
+    const response = await fetch("/history");
+    const history = await response.json();
+
+    const historyBox = document.getElementById("history");
+
+    historyBox.innerHTML = "";
+
+    history.reverse().forEach(item => {
+
+        const entry = document.createElement("div");
+
+        entry.textContent =
+            item.sentiment + " | " +
+            item.confidence + "% | " +
+            item.language + " | " +
+            item.word_count + " words";
+
+        historyBox.appendChild(entry);
+    });
+}
+
+loadHistory();
+
 </script>
 
 </body>
