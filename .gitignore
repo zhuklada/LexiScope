@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+.venv/
+product/index.html.before-model
+product/index.html.day12-backup

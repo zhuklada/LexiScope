@@ -327,5 +327,21 @@ loadHistory();
 
 </script>
 
+<script type="module">
+import { pipeline } from "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.1";
+
+try {
+    window.lexiScopeClassifier = await pipeline(
+        "text-classification",
+        "Xenova/bert-base-multilingual-uncased-sentiment",
+        { dtype: "q8" }
+    );
+
+    console.log("LexiScope multilingual model loaded.");
+} catch (error) {
+    console.error("Model loading failed:", error);
+}
+</script>
+
 </body>
 </html>

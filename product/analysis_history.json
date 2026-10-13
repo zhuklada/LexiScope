@@ -1,2 +1,11 @@
 {"text": "The product was amazing and the service is good", "sentiment": "POSITIVE", "confidence": 99.99, "word_count": 9, "character_count": 47, "sentence_count": 1, "average_word_length": 4.33}
 {"text": "I hate this product. The servise is terrible.", "sentiment": "NEGATIVE", "confidence": 99.97, "word_count": 8, "character_count": 45, "sentence_count": 2, "average_word_length": 4.5}
+{"language": "English", "text": "The product is amazing.", "sentiment": "POSITIVE", "confidence": 99.99, "word_count": 4, "character_count": 23, "sentence_count": 1, "average_word_length": 4.75}
+{"language": "English", "text": "The product is amazing and the service is good.", "sentiment": "POSITIVE", "confidence": 70.0, "word_count": 9, "character_count": 47, "sentence_count": 1, "average_word_length": 4.22}
+{"text": "The product is amazing.", "sentiment": "UNKNOWN", "confidence": 0, "language": "English", "word_count": 4, "character_count": 23, "sentence_count": 1, "average_word_length": 4.75}
+{"text": "The product is amazing.", "sentiment": "UNKNOWN", "confidence": 0, "language": "English", "word_count": 4, "character_count": 23, "sentence_count": 1, "average_word_length": 4.75}
+{"text": "This product is terrible", "sentiment": "UNKNOWN", "confidence": 0, "language": "English", "word_count": 4, "character_count": 24, "sentence_count": 1, "average_word_length": 5.25}
+{"text": "This product is terrible", "sentiment": "UNKNOWN", "confidence": 0, "language": "English", "word_count": 4, "character_count": 24, "sentence_count": 1, "average_word_length": 5.25}
+{"text": "Продукт ужасен", "sentiment": "NEGATIVE", "confidence": 47.58, "language": "Russian", "word_count": 2, "character_count": 14, "sentence_count": 1, "average_word_length": 6.5}
+{"text": "Продукт отличный", "sentiment": "POSITIVE", "confidence": 38.51, "language": "Russian", "word_count": 2, "character_count": 16, "sentence_count": 1, "average_word_length": 7.5}
+{"text": "The product is terrible", "sentiment": "NEGATIVE", "confidence": 79.35, "language": "English", "word_count": 4, "character_count": 23, "sentence_count": 1, "average_word_length": 5.0}
