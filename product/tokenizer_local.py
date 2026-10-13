@@ -68,6 +68,8 @@ class LocalTokenizer:
 
     def encode(self, text, max_length=128):
         tokens = self.tokenize(text)[:max_length]
+        if not tokens:
+            tokens = ["[CLS]", "[SEP]"]
         if tokens[-1] != "[SEP]":
             tokens[-1] = "[SEP]"
 

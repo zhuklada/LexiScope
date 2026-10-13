@@ -13,8 +13,14 @@ with open("model_config.json", encoding="utf-8") as file:
     config = json.load(file)
 
 tests = [
-    "This product is amazing!",
     "Продукт ужасен",
+    "Продукт отличный",
+    "Мне не понравилось",
+    "Мне очень понравилось",
+    "Качество плохое",
+    "Качество отличное",
+    "The product is terrible",
+    "The product is excellent",
 ]
 
 for text in tests:

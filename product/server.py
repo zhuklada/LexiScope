@@ -38,15 +38,18 @@ def analyze_sentiment(text):
     probabilities = np.exp(logits - np.max(logits))
     probabilities /= probabilities.sum()
 
-    index = int(np.argmax(probabilities))
-    confidence = float(probabilities[index])
+    negative = float(probabilities[0] + probabilities[1])
+    neutral = float(probabilities[2])
+    positive = float(probabilities[3] + probabilities[4])
 
-    if index <= 1:
-        sentiment = "NEGATIVE"
-    elif index == 2:
-        sentiment = "NEUTRAL"
-    else:
-        sentiment = "POSITIVE"
+    scores = {
+        "NEGATIVE": negative,
+        "NEUTRAL": neutral,
+        "POSITIVE": positive,
+    }
+
+    sentiment = max(scores, key=scores.get)
+    confidence = scores[sentiment]
 
     return sentiment, round(confidence * 100, 2)
 
