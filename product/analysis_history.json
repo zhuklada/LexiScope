@@ -9,3 +9,4 @@
 {"text": "Продукт ужасен", "sentiment": "NEGATIVE", "confidence": 47.58, "language": "Russian", "word_count": 2, "character_count": 14, "sentence_count": 1, "average_word_length": 6.5}
 {"text": "Продукт отличный", "sentiment": "POSITIVE", "confidence": 38.51, "language": "Russian", "word_count": 2, "character_count": 16, "sentence_count": 1, "average_word_length": 7.5}
 {"text": "The product is terrible", "sentiment": "NEGATIVE", "confidence": 79.35, "language": "English", "word_count": 4, "character_count": 23, "sentence_count": 1, "average_word_length": 5.0}
+{"text": "The product is excellent", "sentiment": "POSITIVE", "confidence": 79.44, "language": "English", "word_count": 4, "character_count": 24, "sentence_count": 1, "average_word_length": 5.25}

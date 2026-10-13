@@ -288,6 +288,8 @@ async function analyzeText() {
         document.getElementById("sentenceCount").textContent =
             data.sentence_count;
 
+    await loadHistory();
+
     } catch (error) {
 
         document.getElementById("sentiment").textContent =
