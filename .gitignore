@@ -3,3 +3,13 @@ __pycache__/
 .venv/
 product/index.html.before-model
 product/index.html.day12-backup
+# Local ML models and downloaded model files
+*.onnx
+product/sentiment_v2/.cache/
+product/sentiment_v2/onnx/*.download
+product/model_quantized.onnx.broken
+
+# Local analysis history and temporary backups
+product/analysis_history.json
+product/server.py.before-sentiment-v2
+product/sentiment_v2/onnx/*.broken
